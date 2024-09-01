@@ -1,17 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-
 import dao.UsuarioDAO;
 import java.util.List;
 import modelo.Usuario;
 
-/**
- *
- * @author Sebastian
- */
 public class UsuarioDAOTest {
     public static void main(String[] args) {
         UsuarioDAO dao = new UsuarioDAO();
