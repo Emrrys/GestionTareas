@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -23,10 +25,10 @@
                         <a class="nav-link" href="index.jsp">Inicio <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tareas.jsp">Tareas</a>
+                        <a class="nav-link" href="TareaControlador?action=listar">Tareas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Usuarios</a>
+                        <a class="nav-link" href="formularioTarea.jsp">Usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Salir</a>
@@ -61,19 +63,19 @@
                         </thead>
                         <tbody>
                             <!-- Aquí se iterarán las tareas -->
-                        <c:forEach var="tarea" items="${listaTareas}">
-                            <tr>
-                                <td>${tarea.idTarea}</td>
-                                <td>${tarea.titulo}</td>
-                                <td>${tarea.descripcion}</td>
-                                <td>${tarea.estado}</td>
-                                <td>${tarea.fecha}</td>
-                                <td>
-                                    <a href="TareaControlador?action=editar&id=${tarea.idTarea}" class="btn btn-warning btn-sm">Editar</a>
-                                    <a href="TareaControlador?action=borrar&id=${tarea.idTarea}" class="btn btn-danger btn-sm">Eliminar</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                            <c:forEach var="tarea" items="${listaTareas}">
+                                <tr>
+                                    <td>${tarea.idTarea}</td>
+                                    <td>${tarea.titulo}</td>
+                                    <td>${tarea.descripcion}</td>
+                                    <td>${tarea.estado}</td>
+                                    <td>${tarea.fecha}</td>
+                                    <td>
+                                        <a href="TareaControlador?action=editar&id=${tarea.idTarea}" class="btn btn-warning btn-sm">Editar</a>
+                                        <a href="TareaControlador?action=borrar&id=${tarea.idTarea}" class="btn btn-danger btn-sm">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

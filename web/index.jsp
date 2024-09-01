@@ -28,10 +28,10 @@
                         <a class="nav-link" href="index.jsp">Inicio <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tareas.jsp">Tareas</a>
+                        <a class="nav-link" href="TareaControlador?action=listar">Tareas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Usuarios</a>
+                        <a class="nav-link" href="formularioTarea.jsp">Usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Salir</a>

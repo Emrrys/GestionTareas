@@ -7,7 +7,7 @@ public class UsuarioDAOTest {
         UsuarioDAO dao = new UsuarioDAO();
 
         // Prueba registrar
-        Usuario nuevoUsuario = new Usuario(0, "Sebastian", "sebastian@mail.com", "1234");
+        Usuario nuevoUsuario = new Usuario(11, "Sebastian", "sebastian@mail.com", "1234");
         boolean registrado = dao.registrar(nuevoUsuario);
         System.out.println("Registrado: " + registrado);
 
