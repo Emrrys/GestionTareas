@@ -29,7 +29,7 @@ public class TareaControlador extends HttpServlet {
             case "lista":
                 listarTareas(request, response);
                 break;
-            case "nuevo":
+            case "editar":
                 mostrarFormularioCrear(request, response);
                 break;
             case "borrar":

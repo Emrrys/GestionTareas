@@ -10,11 +10,39 @@ import config.ConexionDB;
 import modelo.Usuario;
 
 public class UsuarioDAO {
+
     private Connection con;
     private PreparedStatement ps;
     private ResultSet rs;
-    
-    public boolean registrar(Usuario usuario){
+
+    public Usuario obtenerPorId(int id) {
+        Usuario usuario = null;
+        String sql = "SELECT * FROM usuario WHERE idUsuario = ?";
+        try {
+            con = ConexionDB.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                usuario = new Usuario();
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setPassword(rs.getString("password"));  // Esto es opcional
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return usuario;
+    }
+
+    public boolean registrar(Usuario usuario) {
         String sql = "INSERT INTO usuario(nombre, email, password) VALUES (?, ?, ?)";
         try {
             con = ConexionDB.getConnection();
@@ -35,8 +63,8 @@ public class UsuarioDAO {
             }
         }
     }
-    
-    public Usuario validar (String email, String password){
+
+    public Usuario validar(String email, String password) {
         Usuario usuario = null;
         String sql = "SELECT * FROM usuario WHERE email = ? AND password = ?";
         try {
@@ -47,9 +75,10 @@ public class UsuarioDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("id"));
+                usuario.setIdUsuario(rs.getInt("idUsuario"));  // Cambiar "id" a "idUsuario"
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setEmail(rs.getString("email"));
+                // No guardas la contraseña por razones de seguridad
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,8 +91,8 @@ public class UsuarioDAO {
         }
         return usuario;
     }
-    
-    public List<Usuario> listar(){
+
+    public List<Usuario> listar() {
         List<Usuario> lista = new ArrayList<>();
         String sql = "SELECT * FROM usuario";
         try {
@@ -72,7 +101,7 @@ public class UsuarioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("id"));
+                usuario.setIdUsuario(rs.getInt("idUsuario"));  // Cambiar "id" a "idUsuario"
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setEmail(rs.getString("email"));
                 lista.add(usuario);
@@ -88,24 +117,48 @@ public class UsuarioDAO {
         }
         return lista;
     }
-    
+
     public boolean eliminar(int id) {
-    String sql = "DELETE FROM usuario WHERE idUsuario = ?";
-    try {
-        con = ConexionDB.getConnection();
-        ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
-        ps.executeUpdate();
-        return true;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
-    } finally {
+        String sql = "DELETE FROM usuario WHERE idUsuario = ?";
         try {
-            con.close();
+            con = ConexionDB.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
-}
+
+    public boolean actualizar(Usuario usuario) {
+        String sql = "UPDATE usuario SET nombre = ?, email = ?, password = ? WHERE idUsuario = ?";
+        try {
+            con = ConexionDB.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getEmail());
+            ps.setString(3, usuario.getPassword());
+            ps.setInt(4, usuario.getIdUsuario());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

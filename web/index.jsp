@@ -1,13 +1,9 @@
-<%-- 
-    Document   : index
-    Created on : 31-08-2024, 11:17:42 p. m.
-    Author     : Sebastian
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Gestión de Tareas</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -31,7 +27,7 @@
                         <a class="nav-link" href="TareaControlador?action=listar">Tareas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formularioTarea.jsp">Usuarios</a>
+                        <a class="nav-link" href="UsuarioControlador?action=listar">Usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Salir</a>

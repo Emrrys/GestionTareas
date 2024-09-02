@@ -26,7 +26,7 @@
                         <a class="nav-link" href="TareaControlador?action=listar">Tareas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formularioTarea.jsp">Usuarios</a>
+                        <a class="nav-link" href="UsuarioControlador?action=listar">Usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Salir</a>
@@ -41,18 +41,18 @@
                 <div class="col-md-6 offset-md-3">
                     <h2 class="text-center">Formulario de Tareas</h2>
                     <form action="TareaControlador?action=actualizar" method="post">
-                        <input type="hidden" name="idTarea" value="${tarea.idTarea}" />
+                        <input type="hidden" name="idTarea" value="${tarea.idTarea}">
                         <div class="form-group">
                             <label for="titulo">Título:</label>
-                            <input type="text" class="form-control" id="titulo" name="titulo" value="${tarea.titulo}" required>
+                            <input type="text" class="form-control" id="titulo" name="titulo" value="${tarea.titulo}">
                         </div>
                         <div class="form-group">
                             <label for="descripcion">Descripción:</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" required>${tarea.descripcion}</textarea>
+                            <textarea class="form-control" id="descripcion" name="descripcion">${tarea.descripcion}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="estado">Estado:</label>
-                            <select class="form-control" id="estado" name="estado" required>
+                            <select class="form-control" id="estado" name="estado">
                                 <option value="Pendiente" ${tarea.estado == 'Pendiente' ? 'selected' : ''}>Pendiente</option>
                                 <option value="En Progreso" ${tarea.estado == 'En Progreso' ? 'selected' : ''}>En Progreso</option>
                                 <option value="Completada" ${tarea.estado == 'Completada' ? 'selected' : ''}>Completada</option>
@@ -60,10 +60,11 @@
                         </div>
                         <div class="form-group">
                             <label for="fecha">Fecha:</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" value="${tarea.fecha}" required>
+                            <input type="date" class="form-control" id="fecha" name="fecha" value="${tarea.fecha}">
                         </div>
+                        <input type="hidden" name="idUsuario" value="${tarea.idUsuario}">
                         <button type="submit" class="btn btn-success">Guardar</button>
-                        <a href="TareaControlador?action=listar" class="btn btn-secondary">Cancelar</a>
+                        <a href="TareaControlador?action=lista" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>
             </div>

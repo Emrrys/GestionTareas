@@ -28,7 +28,7 @@
                         <a class="nav-link" href="TareaControlador?action=listar">Tareas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formularioTarea.jsp">Usuarios</a>
+                        <a class="nav-link" href="UsuarioControlador?action=listar">Usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Salir</a>
@@ -36,7 +36,7 @@
                 </ul>
             </div>
         </nav>
-
+        
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="text-center">Lista de Tareas</h2>
-                    <a href="TareaControlador?action=nuevo" class="btn btn-primary mb-3">Nueva Tarea</a>
+                    <a href="TareaControlador?action=editar" class="btn btn-primary mb-3">Nueva Tarea</a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
