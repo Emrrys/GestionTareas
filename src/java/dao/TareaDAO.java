@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import java.sql.Connection;
@@ -13,10 +9,6 @@ import java.util.List;
 import config.ConexionDB;
 import modelo.Tarea;
 
-/**
- *
- * @author Sebastian
- */
 public class TareaDAO {
 
     private Connection con;
@@ -31,7 +23,7 @@ public class TareaDAO {
             ps.setString(1, tarea.getTitulo());
             ps.setString(2, tarea.getDescripcion());
             ps.setString(3, tarea.getEstado());
-            ps.setDate(4, new java.sql.Date(tarea.getFecha().getTime())); // Convertimos java.util.Date a java.sql.Date
+            ps.setDate(4, new java.sql.Date(tarea.getFecha().getTime()));
             ps.setInt(5, tarea.getIdUsuario());
             ps.executeUpdate();
             return true;
@@ -108,20 +100,26 @@ public class TareaDAO {
 
     public boolean actualizar(Tarea tarea) {
         String sql = "UPDATE tarea SET titulo = ?, descripcion = ?, estado = ?, fecha = ?, idUsuario = ? WHERE idTarea = ?";
-        try (Connection con = ConexionDB.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
+        try {
+            con = ConexionDB.getConnection();
+            ps = con.prepareStatement(sql);
             ps.setString(1, tarea.getTitulo());
             ps.setString(2, tarea.getDescripcion());
             ps.setString(3, tarea.getEstado());
             ps.setDate(4, tarea.getFecha());
             ps.setInt(5, tarea.getIdUsuario());
             ps.setInt(6, tarea.getIdTarea());
-
-            ps.executeUpdate();
-            return true;
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

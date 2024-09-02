@@ -1,4 +1,12 @@
+<%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -23,13 +31,16 @@
                         <a class="nav-link" href="index.jsp">Inicio <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="TareaControlador?action=listar">Tareas</a>
+                        <a class="nav-link" href="TareaControlador?action=lista">Tareas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="UsuarioControlador?action=listar">Usuarios</a>
+                        <a class="nav-link" href="UsuarioControlador?action=lista">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Salir</a>
+                        <a class="nav-link" href="login.jsp">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="UsuarioControlador?action=salir">Salir</a>
                     </li>
                 </ul>
             </div>
@@ -62,9 +73,10 @@
                             <label for="fecha">Fecha:</label>
                             <input type="date" class="form-control" id="fecha" name="fecha" value="${tarea.fecha}">
                         </div>
-                        <input type="hidden" name="idUsuario" value="${tarea.idUsuario}">
+                        
                         <button type="submit" class="btn btn-success">Guardar</button>
                         <a href="TareaControlador?action=lista" class="btn btn-secondary">Cancelar</a>
+                        <input type="hidden" name="idUsuario" value="${tarea.idUsuario}"> <%--  --%>
                     </form>
                 </div>
             </div>

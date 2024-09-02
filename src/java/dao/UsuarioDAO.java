@@ -28,7 +28,7 @@ public class UsuarioDAO {
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setEmail(rs.getString("email"));
-                usuario.setPassword(rs.getString("password"));  // Esto es opcional
+                usuario.setPassword(rs.getString("password"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,10 +75,9 @@ public class UsuarioDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("idUsuario"));  // Cambiar "id" a "idUsuario"
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setEmail(rs.getString("email"));
-                // No guardas la contraseña por razones de seguridad
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,7 +100,7 @@ public class UsuarioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("idUsuario"));  // Cambiar "id" a "idUsuario"
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setEmail(rs.getString("email"));
                 lista.add(usuario);

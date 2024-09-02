@@ -63,9 +63,9 @@ public class TareaControlador extends HttpServlet {
     }
 
     private void listarTareas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Tarea> listaTareas = tareaDAO.listar(); // Obtener la lista de tareas
-        request.setAttribute("listaTareas", listaTareas); // Establecer el atributo de la solicitud
-        request.getRequestDispatcher("tareas.jsp").forward(request, response); // Reenviar a la página JSP
+        List<Tarea> listaTareas = tareaDAO.listar();
+        request.setAttribute("listaTareas", listaTareas);
+        request.getRequestDispatcher("tareas.jsp").forward(request, response);
     }
 
     private void mostrarFormularioCrear(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -78,16 +78,21 @@ public class TareaControlador extends HttpServlet {
     }
 
     private void actualizarTarea(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int idTarea = Integer.parseInt(request.getParameter("idTarea"));
+        String idTareaStr = request.getParameter("idTarea");
         String titulo = request.getParameter("titulo");
         String descripcion = request.getParameter("descripcion");
         String estado = request.getParameter("estado");
-        Date fecha = Date.valueOf(request.getParameter("fecha"));
-        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+        String fechaStr = request.getParameter("fecha");
+        String idUsuarioStr = request.getParameter("idUsuario");
+
+        int idTarea = (idTareaStr != null && !idTareaStr.isEmpty()) ? Integer.parseInt(idTareaStr) : 0;
+        int idUsuario = (idUsuarioStr != null && !idUsuarioStr.isEmpty()) ? Integer.parseInt(idUsuarioStr) : 0;
+        Date fecha = (fechaStr != null && !fechaStr.isEmpty()) ? Date.valueOf(fechaStr) : null;
 
         Tarea tareaActualizada = new Tarea(idTarea, titulo, descripcion, estado, fecha, idUsuario);
 
         tareaDAO.actualizar(tareaActualizada);
+
         response.sendRedirect("TareaControlador?action=listar");
     }
 

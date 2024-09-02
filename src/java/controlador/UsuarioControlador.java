@@ -19,11 +19,9 @@ public class UsuarioControlador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-
         if (action == null) {
             action = "validar";
         }
-
         switch (action) {
             case "insertar":
                 insertarUsuario(request, response);
@@ -40,11 +38,9 @@ public class UsuarioControlador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-
         if (action == null) {
             action = "listar";
         }
-
         switch (action) {
             case "listar":
                 listarUsuarios(request, response);
@@ -71,7 +67,6 @@ public class UsuarioControlador extends HttpServlet {
     private void validarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
         Usuario usuario = usuarioDAO.validar(email, password);
         if (usuario != null) {
             request.getSession().setAttribute("usuario", usuario);
@@ -103,12 +98,10 @@ public class UsuarioControlador extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setNombre(nombre);
         nuevoUsuario.setEmail(email);
         nuevoUsuario.setPassword(password);
-
         usuarioDAO.registrar(nuevoUsuario);
         response.sendRedirect("UsuarioControlador?action=listar");
     }
@@ -118,9 +111,7 @@ public class UsuarioControlador extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
         Usuario usuarioActualizado = new Usuario(idUsuario, nombre, email, password);
-
         usuarioDAO.actualizar(usuarioActualizado);
         response.sendRedirect("UsuarioControlador?action=listar");
     }
